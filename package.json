@@ -1,7 +1,7 @@
 {
-  "name": "@nathanjhood/web-api",
+  "name": "web-components",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "public/index.html",
   "license": "MIT",
   "private": true,
   "scripts": {
