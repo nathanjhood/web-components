@@ -22,7 +22,6 @@
       // @ts-check
 
       class AppComponent extends HTMLElement {
-
         constructor() {
           super();
           this.attachShadow({ mode: 'open' });
@@ -32,7 +31,6 @@
             this.shadowRoot = new ShadowRoot;
           }
         }
-
         /**
          * @param {string} message
          * @returns {string}
@@ -40,7 +38,6 @@
         render(message) {
           return `<slot>${message}</slot>`;
         }
-
       }
 
       window.customElements.define('app-component', AppComponent);
