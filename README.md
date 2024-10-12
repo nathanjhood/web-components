@@ -65,7 +65,6 @@ Rebuilding...
 
 ```sh
 ./
-├── package.json
 ├── index.html
 └── static/
     ├── css/
@@ -79,7 +78,6 @@ Rebuilding...
 ```
 
 ```sh
-./package.json
 ./index.html
 ./static/css/index.css
 ./static/js/index.js
