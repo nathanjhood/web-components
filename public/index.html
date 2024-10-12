@@ -51,7 +51,8 @@
       let root = document.getElementById("root");
 
       if(root) {
-        root.appendChild(new AppComponent());
+        const app = new AppComponent()
+        root.appendChild(app);
       } else {
         errors.push(new Error('Missing required <div id=\"root\">'));
       }
@@ -77,24 +78,3 @@
     </script>
   </body>
 </html>
-
-    <script type="module">
-      // // proper initialization
-      // if ('function' === typeof importScripts) {
-      //   importScripts('./sw.js');
-      //   window.addEventListener('message', onMessage);
-
-      //   function onMessage(e) {
-      //     // do some work here
-      //     console.log(e);
-      //   }
-      // }
-      // if ('serviceWorker' in navigator) {
-      //   window.addEventListener('load', (ev) => {
-      //     // navigator.serviceWorker.register('/sw.js');
-      //     // console.log(ev)
-
-      //   }, { once: true });
-      // }
-
-    </script>
