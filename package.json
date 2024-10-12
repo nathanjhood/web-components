@@ -11,7 +11,7 @@
     "watch": "pkgroll --watch",
     "minify": "pkgroll --minify",
     "sourcemap": "pkgroll --sourcemap",
-    "css": "tailwindcss -i src/css/tailwind.css -o public/static/css/tailwind.css --config tailwind.config.js --watch",
+    "css": "tailwindcss -i src/css/tailwind.css -o public/static/css/tailwind.css --config tailwind.config.mjs --watch",
     "type-check": "tsc --noEmit",
     "prepublishOnly": "pkgroll --build --clean-dist --sourcemap",
     "lint": "eslint .",
