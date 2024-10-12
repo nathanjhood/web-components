@@ -51,7 +51,7 @@ Rebuilding...
    └──────────────────────────────────────────┘
 ```
 
-[Open in your browser](http://localhost:3000)
+[Open in your browser](http://localhost:3000) and refresh the page after every change.
 
 ---
 
@@ -195,6 +195,19 @@ window.customElements.define('app-component',
     }
   }
 );
+```
+
+---
+
+### `root.appChild(app)`
+
+```ts
+// get the element which has 'id="root"'
+let root = document.getElementById("root");
+// construct an AppComponent instance
+const app = new AppComponent();
+// append the web component to the "root" elemnt
+root.appendChild(app);
 ```
 
 ---
