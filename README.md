@@ -17,6 +17,12 @@ OOP in the browser!
 </html>
 ```
 
+- No config
+- No framework
+- No abtractions
+
+Just raw [Web API](https://developer.mozilla.org/en-US/docs/Web/API).
+
 ## How to...
 
 ### `serve ./public`
