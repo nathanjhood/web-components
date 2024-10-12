@@ -115,9 +115,7 @@ class AppComponent extends HTMLElement {
 
 // "...plus more ;) "
 ```
-<pre>
-  <s>italics</s>
-</pre>
+
 ---
 
 ### `HTMLElement.super()`
