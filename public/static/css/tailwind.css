@@ -559,103 +559,41 @@ video {
 }
 
 /**
-   * From create-expo-app: Responsive design
-   */
-
-#root,
-  body,
-  html {
-  height: 100%;
-}
-
-body {
-  overflow: hidden;
-}
-
-#root {
-  display: flex;
-}
-
-/**
-   * From create-expo-app: Responsive theme
-   */
-
-body {
-  color: #000000;
-  background-color: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    color: #ffffff;
-    background-color: #000000;
-  }
-}
-
-/**
-   * From create-react-app
-   */
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-      'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-}
-
-/**
  * This injects Tailwind's component classes and any component classes
  * registered by plugins.
  */
 
-/**
-   * From create-react-app
-   */
-
-.App {
-  text-align: center;
+.container {
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
   }
+}
 
-  to {
-    transform: rotate(360deg);
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
   }
 }
 
@@ -663,32 +601,6 @@ code {
  * This injects Tailwind's utility classes and any utility classes registered
  * by plugins.
  */
-
-.inline {
-  display: inline;
-}
-
-.flex {
-  display: flex;
-}
-
-.hidden {
-  display: none;
-}
-
-.transform {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.antialiased {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.grayscale {
-  --tw-grayscale: grayscale(100%);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
 
 /**
  * Use this directive to control where Tailwind injects the hover, focus,
