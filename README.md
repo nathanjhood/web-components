@@ -178,7 +178,7 @@ class AppComponent extends HTMLElement {
 ### `CustomElementRegistry`
 
 ```ts
-customElements.define('app-component', AppComponent);
+window.customElements.define('app-component', AppComponent);
 ```
 
 ---
@@ -199,13 +199,15 @@ window.customElements.define('app-component',
 
 ---
 
-### `root.appChild(app)`
+### `root.appendChild(app)`
 
 ```ts
 // get the element which has 'id="root"'
 let root = document.getElementById("root");
+
 // construct an AppComponent instance
 const app = new AppComponent();
+
 // append the web component to the "root" elemnt
 root.appendChild(app);
 ```
@@ -320,3 +322,6 @@ customElements.define('app-component',
 - [MDN's Web API glossary](https://developer.mozilla.org/en-US/docs/Web/API)
 - [MDN's Web API - HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)
 - [Building Interoperable Web Components (including React)](https://css-tricks.com/building-interoperable-web-components-react/)
+
+[Read me on github.com](https://github.com/nathanjhood/web-components)
+[Read me on nathanjhood.github.io](https://nathanjhood.github.io/web-components)
