@@ -140,7 +140,7 @@ class AppComponent extends HTMLElement {
     // inside here, "this" means "this 'AppComponent'"...
 
     super();
-    this.
+    this. // <-- '.' should produce a long list of props and methods...
   }
 }
 ```
