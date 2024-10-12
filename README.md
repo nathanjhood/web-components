@@ -203,17 +203,19 @@ window.customElements.define('app-component',
 
 ---
 
-### `root.appendChild(app)`
+### `root.appendChild(ApplicationComponent)`
 
 ```ts
-// get the element which has 'id="root"'
-let root = document.getElementById("root");
-
-// construct an AppComponent instance
-const app = new AppComponent();
-
-// append the web component to the "root" elemnt
-root.appendChild(app);
+window.customElements.define('app-component',
+  class AppComponent extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.shadowRoot.innerHTML = `<slot>Your app goes here</slot>`;
+	  document.getElementById("root")?.appendChild(this);
+    }
+  }
+);
 ```
 
 ---
@@ -259,6 +261,7 @@ class AppComponent extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = this.render();
+	document.getElementById("root")?.appendChild(this);
   }
   render() {
     return `<slot>Your app goes here</slot>`;
@@ -276,6 +279,7 @@ class AppComponent extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = this.render('Your app goes here');
+	document.getElementById("root")?.appendChild(this);
   }
   render(message) {
     return `<slot>${message}</slot>`;
@@ -296,6 +300,7 @@ class AppComponent extends HTMLElement {
   setup() {
 	this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = this.render('Your app goes here');
+	document.getElementById("root")?.appendChild(this);
   }
   render(message) {
     return `<slot>${message}</slot>`;

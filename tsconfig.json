@@ -42,7 +42,7 @@
     "composite": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo"
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
   "include": [
     "**/**/*.d.ts",

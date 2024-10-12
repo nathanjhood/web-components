@@ -7,13 +7,8 @@
   "scripts": {
     "start": "npm-run-all --parallel css serve",
     "serve": "serve public",
-    "build": "pkgroll --build",
-    "watch": "pkgroll --watch",
-    "minify": "pkgroll --minify",
-    "sourcemap": "pkgroll --sourcemap",
     "css": "tailwindcss -i src/css/tailwind.css -o public/static/css/tailwind.css --config tailwind.config.mjs --watch",
     "type-check": "tsc --noEmit",
-    "prepublishOnly": "pkgroll --build --clean-dist --sourcemap",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --check ./**/*.{js,jsx,ts,tsx,css,md,json} --config ./prettier.config.mjs",
@@ -21,12 +16,10 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
-    "pkgroll": "^2.5.0",
     "postcss": "^8.4.47",
     "react": "^18.3.1",
     "serve": "^14.2.3",
     "tailwindcss": "^3.4.13",
-    "tsx": "^4.19.1",
     "web-vitals": "2.1.0"
   },
   "devDependencies": {

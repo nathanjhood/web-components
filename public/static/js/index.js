@@ -15,24 +15,35 @@ class AppComponent extends HTMLElement {
    */
   setup() {
     this.attachShadow({ mode: 'open' });
-    if(this.shadowRoot) {
-      this.shadowRoot.innerHTML = this.render('Your application goes here!');
-    }
+    this.id = "app";
+    this.className = "App";
     return;
   }
   /**
    * Renders an `AppComponent`, with optional inner HTML
-   * @param {string | undefined} innerHTML
+   * @param {HTMLElement['innerHTML']} innerHTML
    * @returns {string}
    * @private
    */
   render(innerHTML = '') {
     return `<slot>${innerHTML}</slot>`;
   }
+  connectedCallback() {
+    console.info("<application-component> element added to page.");
+    if(this.shadowRoot) {
+      this.shadowRoot.innerHTML = this.render('Your application goes here!');
+    }
+  }
+
+  disconnectedCallback() {
+    console.info("<application-component> element removed from page.");
+  }
 }
 
-window.customElements.define('my-component', AppComponent);
 
+if (!window.customElements.get('app-component')) {
+  window.customElements.define('app-component', AppComponent);
+}
 
 /** @type {Error[]} */
 let errors = [];
@@ -40,7 +51,7 @@ let errors = [];
 // get the element which has 'id="root"'
 let root = document.getElementById("root");
 
-if(root) {
+if(root !== null) {
   const app = new AppComponent();
   // append the web component to the "root"
   root.appendChild(app);
