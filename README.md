@@ -17,7 +17,39 @@
 
 ## How to...
 
-### `<projectFolder>`
+```sh
+$ git clone git@github.com:nathanjhood/web-components.git
+```
+
+```sh
+$ cd web-components
+```
+
+```sh
+$ npm install
+```
+
+```sh
+$ npm run start
+# ...
+
+Rebuilding...
+
+   ┌──────────────────────────────────────────┐
+   │                                          │
+   │   Serving!                               │
+   │                                          │
+   │   - Local:    http://localhost:3000      │
+   │   - Network:  http://192.168.0.13:3000   │
+   │                                          │
+   │   Copied local address to clipboard!     │
+   │                                          │
+   └──────────────────────────────────────────┘
+```
+
+[Open in your browser](http://localhost:3000)
+
+### `<projectFolder>/public`
 
 ```sh
 ./
@@ -139,6 +171,28 @@ class AppComponent extends HTMLElement {
 }
 ```
 
+### `CustomElementRegistry`
+
+```ts
+customElements.define('app-component', AppComponent);
+```
+
+---
+
+### `'app-component': AppComponent`
+
+```ts
+window.customElements.define('app-component',
+  class AppComponent extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.shadowRoot.innerHTML = `<slot>Your app goes here</slot>`;
+    }
+  }
+);
+```
+
 ---
 
 ### `<app-component>`
@@ -204,49 +258,6 @@ class AppComponent extends HTMLElement {
     return `<slot>${message}</slot>`;
   }
 }
-```
-
----
-
-### `'app-component': AppComponent`
-
-```ts
-window.customElements.define('app-component',
-  class AppComponent extends HTMLElement {
-    constructor() {
-      super();
-      this.attachShadow({ mode: 'open' });
-      this.shadowRoot.innerHTML = `<slot>Your app goes here</slot>`;
-    }
-  }
-);
-```
-
----
-
-### `CustomElementRegistry`
-
-```ts
-customElements.define('app-component', AppComponent);
-```
-
----
-
-###
-
-```html
-<!doctype html>
-<html lang="en">
-  <head></head>
-  <body>
-    <div id="root">
-      <app-component>
-        <slot>"Your App Goes Here!"</slot>
-      </app-component>
-    </div>
-    <script type="module"></script>
-  </body>
-</html>
 ```
 
 ---
