@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using esbuild-scripts" />
+    <link rel="apple-touch-icon" href="./logo192.png" />
+    <link rel="manifest" href="./.webmanifest" />
+    <meta name="referrer" content="no-referrer" />
+    <link rel="stylesheet" href="./static/css/tailwind.css" />
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>
+      We're sorry but this application doesn't work properly without Javascript
+      enabled. Please enable it to continue.
+    </noscript>
+    <div id="root"></div>
+    <script type="module">
+      // @ts-check
+
+      class AppComponent extends HTMLElement {
+
+        constructor() {
+          super();
+          this.attachShadow({ mode: 'open' });
+          if(this.shadowRoot) {
+            this.shadowRoot.innerHTML = this.render('Your app goes here!');
+          } else {
+            this.shadowRoot = new ShadowRoot;
+          }
+        }
+
+        /**
+         * @param {string} message
+         * @returns {string}
+         */
+        render(message) {
+          return `<slot>${message}</slot>`;
+        }
+
+      }
+
+      window.customElements.define('app-component', AppComponent);
+
+      /** @type {Error[]} */
+      let errors = [];
+
+      let root = document.getElementById("root");
+
+      if(root) {
+        root.appendChild(new AppComponent());
+      } else {
+        errors.push(new Error('Missing required <div id=\"root\">'));
+      }
+
+      // error reporting
+      if(errors.length > 0) errors.forEach(
+        async (error, index, array) => {
+          const errorMessage = JSON.stringify({
+            index: index,
+            [error.name]: {
+              message: error.message,
+              stack: error.stack,
+            }
+          })
+          const pre = document.createElement("pre");
+          const code = document.createElement("code");
+          code.innerText += errorMessage;
+          pre.appendChild(code);
+          document.body.appendChild(pre);
+          console.error(error.message);
+        }
+      )
+    </script>
+  </body>
+</html>
+
+    <script type="module">
+      // // proper initialization
+      // if ('function' === typeof importScripts) {
+      //   importScripts('./sw.js');
+      //   window.addEventListener('message', onMessage);
+
+      //   function onMessage(e) {
+      //     // do some work here
+      //     console.log(e);
+      //   }
+      // }
+      // if ('serviceWorker' in navigator) {
+      //   window.addEventListener('load', (ev) => {
+      //     // navigator.serviceWorker.register('/sw.js');
+      //     // console.log(ev)
+
+      //   }, { once: true });
+      // }
+
+    </script>
