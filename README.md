@@ -281,6 +281,26 @@ class AppComponent extends HTMLElement {
 
 ---
 
+### `AppComponent.setup()`
+
+```ts
+class AppComponent extends HTMLElement {
+  constructor() {
+    super();
+	this.setup();
+  }
+  setup() {
+	this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = this.render();
+  }
+  render(message) {
+    return `<slot>${message}</slot>`;
+  }
+}
+```
+
+---
+
 _tip:_
 
 ```ts
@@ -324,4 +344,5 @@ customElements.define('app-component',
 - [Building Interoperable Web Components (including React)](https://css-tricks.com/building-interoperable-web-components-react/)
 
 [Read me on github.com](https://github.com/nathanjhood/web-components)
+
 [Read me on nathanjhood.github.io](https://nathanjhood.github.io/web-components)

@@ -1,18 +1,30 @@
 // @ts-check
 
 class AppComponent extends HTMLElement {
+  /**
+   * Constructs a new `AppComponentInstance`
+   */
   constructor() {
     super();
+    this.setup();
+  }
+  /**
+   * Requirements for a new `AppComponent` instance.
+   * @returns {void}
+   * @private
+   */
+  setup() {
     this.attachShadow({ mode: 'open' });
     if(this.shadowRoot) {
       this.shadowRoot.innerHTML = this.render('Your application goes here!');
-    } else {
-      this.shadowRoot = new ShadowRoot;
     }
+    return;
   }
   /**
-   * @param {string} innerHTML
+   * Renders an `AppComponent`, with optional inner HTML
+   * @param {string | undefined} innerHTML
    * @returns {string}
+   * @private
    */
   render(innerHTML = '') {
     return `<slot>${innerHTML}</slot>`;
