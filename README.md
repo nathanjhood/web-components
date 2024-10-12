@@ -291,7 +291,7 @@ class AppComponent extends HTMLElement {
   }
   setup() {
 	this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = this.render();
+    this.shadowRoot.innerHTML = this.render('Your app goes here');
   }
   render(message) {
     return `<slot>${message}</slot>`;
