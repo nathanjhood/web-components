@@ -1,5 +1,7 @@
 # Web Components
 
+OOP in the browser!
+
 ```html
 <!doctype html>
 <html lang="en">
@@ -16,6 +18,8 @@
 ```
 
 ## How to...
+
+### `serve ./public`
 
 ```sh
 $ git clone git@github.com:nathanjhood/web-components.git
@@ -48,6 +52,8 @@ Rebuilding...
 ```
 
 [Open in your browser](http://localhost:3000)
+
+---
 
 ### `<projectFolder>/public`
 
