@@ -295,10 +295,10 @@ class AppComponent extends HTMLElement {
 class AppComponent extends HTMLElement {
   constructor() {
     super();
-	this.setup();
+    this.setup();
   }
   setup() {
-	this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = this.render('Your app goes here');
     document.getElementById("root")?.appendChild(this);
   }
