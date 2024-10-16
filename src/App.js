@@ -104,7 +104,7 @@ const App = () => {
     alt="logo"
   />
   <p>
-    Edit <code>src/App.ts</code> and save to reload.
+    Edit <code>src/App.js</code> and save to reload.
   </p>
   <a
     class="App-link"
