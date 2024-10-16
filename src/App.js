@@ -108,11 +108,11 @@ const App = () => {
   </p>
   <a
     class="App-link"
-    href="https://github.com/nathanjhood/ts-web-components"
+    href="https://github.com/nathanjhood/web-components"
     target="_blank"
     rel="noopener noreferrer"
   >
-    Powered by ts-web-components
+    Powered by web-components
   </a>
   </header>
 </div>
