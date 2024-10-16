@@ -23,7 +23,7 @@ OOP in the browser!
 
 Just raw [Web API](https://developer.mozilla.org/en-US/docs/Web/API).
 
-With TailwindCSS, ESBuild, and fast-refreshing development server!
+Powered by TailwindCSS, ESBuild, and fast-refreshing development server!
 
 ## How to...
 
@@ -42,6 +42,14 @@ $ npm install
 ```
 
 ```sh
+# For Windows...
+$env:NODE_ENV="development"
+
+# For Linux/Mac...
+export NODE_ENV="development"
+```
+
+```sh
 $ npm run start
 # ...
 
@@ -54,7 +62,7 @@ To exit: Ctrl + c
 
 ```
 
-[Open in your browser](http://localhost:3000) and refresh the page after every change.
+[Open in your browser](http://localhost:3000) and edit `src/App.js` - the page will automatically refresh itself after every save.
 
 ---
 
