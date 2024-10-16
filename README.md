@@ -19,9 +19,11 @@ OOP in the browser!
 
 - No config
 - No framework
-- No abtractions
+- No abstractions
 
 Just raw [Web API](https://developer.mozilla.org/en-US/docs/Web/API).
+
+With TailwindCSS, ESBuild, and fast-refreshing development server!
 
 ## How to...
 
@@ -45,53 +47,21 @@ $ npm run start
 
 Rebuilding...
 
-   ┌──────────────────────────────────────────┐
-   │                                          │
-   │   Serving!                               │
-   │                                          │
-   │   - Local:    http://localhost:3000      │
-   │   - Network:  http://192.168.0.13:3000   │
-   │                                          │
-   │   Copied local address to clipboard!     │
-   │                                          │
-   └──────────────────────────────────────────┘
+Done in 1623ms.
+
+Server running at http://127.0.0.1:3000/
+To exit: Ctrl + c
+
 ```
 
 [Open in your browser](http://localhost:3000) and refresh the page after every change.
 
 ---
 
-### `<projectFolder>/public`
-
-```sh
-./
-├── index.html
-└── static/
-    ├── css/
-    │   └── index.css
-    ├── js/
-    │   └── index.js
-    └── png/
-        └── logo.png
-
-4 directories, 4 files
-```
-
-```sh
-./index.html
-./static/css/index.css
-./static/js/index.js
-./static/png/logo.png
-
-4 directories, 4 files
-```
-
----
-
 ### `class AppComponent {}`
 
 ```ts
-// static/js/index.js
+// src/App.js
 
 class AppComponent {}
 ```
