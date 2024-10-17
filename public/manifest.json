@@ -8,7 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "static/png/logo322.png",
+      "src": "static/png/logo16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "static/png/logo32.png",
       "type": "image/png",
       "sizes": "32x32"
     },
@@ -16,6 +21,11 @@
       "src": "static/png/logo192.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "static/png/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
