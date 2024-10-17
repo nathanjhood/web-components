@@ -27,7 +27,9 @@ With TailwindCSS, ESBuild, and fast-refreshing development server!
 
 ## How to...
 
-### `serve ./public`
+Step by step!
+
+### `start`
 
 ```sh
 $ git clone git@github.com:nathanjhood/web-components.git

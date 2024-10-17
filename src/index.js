@@ -1,5 +1,6 @@
 // @ts-check
 
+import env from 'env';
 import App from './App';
 import './index.css';
 
@@ -11,43 +12,56 @@ import './index.css';
  */
 
 const render = (
-  /** @type {{ (): HTMLElement; (): any; }} */
+  /** @type { () => HTMLElement } */
   element
 ) => {
-  /**
-   * @type {Error[]}
-   */
+  // Prepare to collect any errors and warnings...
+  /** @type {Error[]} */
   const warnings = [];
-  /**
-   * @type {Error[]}
-   */
+  /** @type {Error[]} */
   const errors = [];
 
+  // get a reference to the HTML element with `id="root"`
+  /** @type {HTMLElement | null} */
   const root = document.getElementById('root');
 
   if (root === null) {
     errors.push(new Error('Missing HTML tag with id="root"'));
   } else {
     if (element) {
-      const el = element();
-      root.appendChild(el);
+      // const el = element();
+      // root.appendChild(el);
+
+      // create a shadow root and attach it to the 'root' element...
+      /** @type {ShadowRoot} */
+      const shadowRoot = root.attachShadow({ mode: 'open' });
+      // for CSS stylesheets to work, create a link pointing at the CSS...
+      /** @type {HTMLLinkElement} */
+      const extStylesheet = document.createElement('link');
+      extStylesheet.setAttribute('rel', 'stylesheet');
+      extStylesheet.setAttribute(
+        'href',
+        `${env['PUBLIC_URL']}static/css/index.css`
+      );
+      // Attach the created elements to the shadow dom
+      shadowRoot.appendChild(extStylesheet);
+      shadowRoot.appendChild(element());
     }
   }
 
   // error reporting
   if (errors.length > 0 || warnings.length > 0) {
-    //
+    // put all errors and warnings (if any) into one array
     const messages = errors.concat(warnings);
     //
-    messages.forEach(async (message) => {
-      //
+    messages.forEach((message) => {
+      // attach each message to the document
       const pre = document.createElement('pre');
       const code = document.createElement('code');
       code.innerText += message.stack + '\n';
-      //
       pre.appendChild(code);
       document.body.appendChild(pre);
-      //
+      // also log the message to the console
       console.error(message.message);
       return message;
     });
@@ -55,81 +69,3 @@ const render = (
 };
 
 export default render(App);
-
-// class AppComponent extends HTMLElement {
-//   /**
-//    * Constructs a new `AppComponentInstance`
-//    */
-//   constructor() {
-//     super();
-//     this.setup();
-//   }
-//   /**
-//    * Requirements for a new `AppComponent` instance.
-//    * @returns {void}
-//    * @private
-//    */
-//   setup() {
-//     this.attachShadow({ mode: 'open' });
-//     this.id = "app";
-//     this.className = "App";
-//     return;
-//   }
-//   /**
-//    * Renders an `AppComponent`, with optional inner HTML
-//    * @param {HTMLElement['innerHTML']} innerHTML
-//    * @returns {string}
-//    * @private
-//    */
-//   render(innerHTML = '') {
-//     return `<slot>${innerHTML}</slot>`;
-//   }
-//   connectedCallback() {
-//     console.info("<application-component> element added to page.");
-//     if(this.shadowRoot) {
-//       this.shadowRoot.innerHTML = this.render('Your application goes here!');
-//     }
-//   }
-
-//   disconnectedCallback() {
-//     console.info("<application-component> element removed from page.");
-//   }
-// }
-
-
-// if (!window.customElements.get('app-component')) {
-//   window.customElements.define('app-component', AppComponent);
-// }
-
-// /** @type {Error[]} */
-// let errors = [];
-
-// // get the element which has 'id="root"'
-// let root = document.getElementById("root");
-
-// if(root !== null) {
-//   const app = new AppComponent();
-//   // append the web component to the "root"
-//   root.appendChild(app);
-// } else {
-//   errors.push(new Error('Missing required <div id="root">'));
-// }
-
-// // error reporting
-// if(errors.length > 0) errors.forEach(
-//   async (error, index) => {
-//     const errorMessage = JSON.stringify({
-//       index: index,
-//       [error.name]: {
-//         message: error.message,
-//         stack: error.stack,
-//       }
-//     })
-//     const pre = document.createElement("pre");
-//     const code = document.createElement("code");
-//     code.innerText += errorMessage;
-//     pre.appendChild(code);
-//     document.body.appendChild(pre);
-//     console.error(error.message);
-//   }
-// )

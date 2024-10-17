@@ -1,6 +1,5 @@
 // @ts-check
 
-import env from 'env';
 import './App.css';
 import logo from './logo.svg';
 
@@ -9,10 +8,11 @@ import logo from './logo.svg';
  */
 const App = () => {
   //
+  console.log('constructing App()');
+  //
   const logoSrc = 'data:image/svg+xml;base64,' + logo;
   //
   if (!window.customElements.get('app-component')) {
-    console.log('constructing App()');
     window.customElements.define(
       'app-component',
       /**
@@ -32,17 +32,7 @@ const App = () => {
          * @private
          */
         setup() {
-          const shadowRoot = this.attachShadow({ mode: 'open' });
-          shadowRoot.innerHTML = this.render();
-          // Append external stylesheet to the shadow dom
-          const linkElem = document.createElement('link');
-          linkElem.setAttribute('rel', 'stylesheet');
-          linkElem.setAttribute(
-            'href',
-            `${env['PUBLIC_URL']}/static/css/index.css`
-          );
-          // Attach the created elements to the shadow dom
-          shadowRoot.appendChild(linkElem);
+          this.innerHTML = this.render();
           console.debug('setup()');
         }
         /**
