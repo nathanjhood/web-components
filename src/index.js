@@ -9,12 +9,11 @@ import './index.css';
  * Renders the passed-in component instance (attaches to the DOM).
  * Requires that your HTML document contains a tag with id set to "root".
  * Renders error and warning messages in case of failure.
+ *
+ * @param {() => HTMLElement} element The element to render
  */
 
-const render = (
-  /** @type { () => HTMLElement } */
-  element
-) => {
+const render = (element) => {
   // Prepare to collect any errors and warnings...
   /** @type {Error[]} */
   const warnings = [];
@@ -28,35 +27,33 @@ const render = (
   if (root === null) {
     errors.push(new Error('Missing HTML tag with id="root"'));
   } else {
-    if (element) {
-      // const el = element();
-      // root.appendChild(el);
-
-      // create a shadow root and attach it to the 'root' element...
-      /** @type {ShadowRoot} */
-      const shadowRoot = root.attachShadow({ mode: 'open' });
-      // for CSS stylesheets to work, create a link pointing at the CSS...
-      /** @type {HTMLLinkElement} */
-      const extStylesheet = document.createElement('link');
-      extStylesheet.setAttribute('rel', 'stylesheet');
-      extStylesheet.setAttribute(
-        'href',
-        `${env['PUBLIC_URL']}static/css/index.css`
-      );
-      // Attach the created elements to the shadow dom
-      shadowRoot.appendChild(extStylesheet);
-      shadowRoot.appendChild(element());
-    }
+    // create a shadow root and attach it to the 'root' element...
+    /** @type {ShadowRoot} */
+    const shadowRoot = root.attachShadow({ mode: 'open' });
+    // for CSS stylesheets to work, create a link pointing at the CSS...
+    /** @type {HTMLLinkElement} */
+    const extStylesheet = document.createElement('link');
+    extStylesheet.setAttribute('rel', 'stylesheet');
+    extStylesheet.setAttribute(
+      'href',
+      `${env['PUBLIC_URL']}static/css/index.css`
+    );
+    // Attach the created elements to the shadow dom
+    shadowRoot.appendChild(extStylesheet);
+    shadowRoot.appendChild(element());
   }
 
   // error reporting
   if (errors.length > 0 || warnings.length > 0) {
     // put all errors and warnings (if any) into one array
+    /** @type {Error[]} */
     const messages = errors.concat(warnings);
     //
     messages.forEach((message) => {
       // attach each message to the document
+      /** @type {HTMLPreElement} */
       const pre = document.createElement('pre');
+      /** @type {HTMLElement} */
       const code = document.createElement('code');
       code.innerText += message.stack + '\n';
       pre.appendChild(code);

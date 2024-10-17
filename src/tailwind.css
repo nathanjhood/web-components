@@ -24,3 +24,5 @@
  * your stylesheet by default.
  */
 @tailwind variants;
+
+@tailwind screens;

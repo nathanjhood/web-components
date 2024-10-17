@@ -4,6 +4,7 @@ import './App.css';
 import logo from './logo.svg';
 
 /**
+ * The `App` component.
  * @returns {HTMLElement}
  */
 const App = () => {
