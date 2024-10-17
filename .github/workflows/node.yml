@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PROJECT_NAME: 'ts-web-components'
+  PROJECT_NAME: 'web-components'
   PROJECT_VERSION: '0.1.0.${{ github.sha }}'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   NODE_ENV: 'production'
