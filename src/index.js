@@ -38,8 +38,17 @@ const render = (element) => {
       'href',
       `${env['PUBLIC_URL']}static/css/index.css`
     );
+    // include Tailwind, if you're using it...
+    /** @type {HTMLLinkElement} */
+    const twStylesheet = document.createElement('link');
+    twStylesheet.setAttribute('rel', 'stylesheet');
+    twStylesheet.setAttribute(
+      'href',
+      `${env['PUBLIC_URL']}static/css/tailwind.css`
+    );
     // Attach the created elements to the shadow dom
     shadowRoot.appendChild(extStylesheet);
+    shadowRoot.appendChild(twStylesheet);
     shadowRoot.appendChild(element());
   }
 
