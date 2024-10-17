@@ -29,6 +29,25 @@ Powered by TailwindCSS, ESBuild, and fast-refreshing development server!
 
 Step by step!
 
+- [`start`](#start)
+- [`class AppComponent {}`](#class-appcomponent-)
+- [`AppComponent.constructor()`](#appcomponentconstructor)
+- [`AppComponent extends HTMLElement`](#appcomponent-extends-htmlelement)
+- [`HTMLElement.super()`](#htmlelementsuper)
+- [`this`](#this)
+- [`AppComponent.innerHtml`](#appcomponentinnerhtml)
+- [`CustomElementRegistry`](#customelementregistry)
+- [`'app-component': AppComponent`](#app-component-appcomponent)
+- [`AppComponent.render()`](#appcomponentrender)
+- [`AppComponent.render(innerHTML)`](#appcomponentrenderinnerhtml)
+- [`AppComponent.setup()`](#appcomponentsetup)
+- [`createElement('app-component')`](#createelementapp-component)
+- [`App()`](#app)
+- [`render(App)`](#renderapp)
+- [`<app-component>`](#app-component)
+- [Tips](#tips)
+- [Further Reading](#further-reading)
+
 ### `start`
 
 ```sh
@@ -70,7 +89,7 @@ To exit: Ctrl + c
 
 ### `class AppComponent {}`
 
-```ts
+```js
 // src/App.js
 
 class AppComponent {}
@@ -80,7 +99,7 @@ class AppComponent {}
 
 ### `AppComponent.constructor()`
 
-```ts
+```js
 class AppComponent {
   constructor() {/** setup goes here... */}
 }
@@ -90,7 +109,7 @@ class AppComponent {
 
 ### `AppComponent extends HTMLElement`
 
-```ts
+```js
 // "I am a HTMLElement"
 
 class AppComponent extends HTMLElement {
@@ -104,7 +123,7 @@ class AppComponent extends HTMLElement {
 
 ### `HTMLElement.super()`
 
-```ts
+```js
 class AppComponent extends HTMLElement {
   constructor() {
     super(); // MUST do this first...
@@ -116,7 +135,7 @@ class AppComponent extends HTMLElement {
 
 ### `this`
 
-```ts
+```js
 class AppComponent extends HTMLElement {
   constructor() {
     // inside here, "this" means "this 'AppComponent'"...
@@ -129,39 +148,23 @@ class AppComponent extends HTMLElement {
 
 ---
 
-### `AppComponent.shadowRoot`
+### `AppComponent.innerHtml`
 
-```ts
-// "attachShadow()" comes from extending the HTMLElement class ;)
-
-class AppComponent extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
-}
-
-```
-
----
-
-### `AppComponent.shadowRoot.innerHtml`
-
-```ts
+```js
 // 'innerHTML' === <app-component>innerHTML</app-component>
 
 class AppComponent extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = `<slot>Your app goes here</slot>`;
+    this.innerHTML = `<slot>Your app goes here</slot>`;
   }
 }
 ```
 
 ### `CustomElementRegistry`
 
-```ts
+```js
+// IMPORTANT
 window.customElements.define('app-component', AppComponent);
 ```
 
@@ -169,13 +172,30 @@ window.customElements.define('app-component', AppComponent);
 
 ### `'app-component': AppComponent`
 
-```ts
-window.customElements.define('app-component',
+```js
+window.customElements.define('app-component', // <-- wrap the class!
   class AppComponent extends HTMLElement {
     constructor() {
       super();
-      this.attachShadow({ mode: 'open' });
-      this.shadowRoot.innerHTML = `<slot>Your app goes here</slot>`;
+      this.innerHTML = `<slot>Your app goes here</slot>`;
+    }
+  }
+); // <-- '.define()' ends here!
+```
+
+---
+
+### `AppComponent.render()`
+
+```js
+window.customElements.define('app-component',
+class AppComponent extends HTMLElement {
+    constructor() {
+      super();
+      this.innerHTML = this.render();
+    }
+    render() {
+      return `<slot>Your app goes here</slot>`;
     }
   }
 );
@@ -183,19 +203,111 @@ window.customElements.define('app-component',
 
 ---
 
-### `root.appendChild(ApplicationComponent)`
+### `AppComponent.render(innerHTML)`
 
-```ts
+```js
 window.customElements.define('app-component',
   class AppComponent extends HTMLElement {
     constructor() {
       super();
-      this.attachShadow({ mode: 'open' });
-      this.shadowRoot.innerHTML = `<slot>Your app goes here</slot>`;
-      document.getElementById("root")?.appendChild(this);
+      this.innerHTML = this.render('Your app goes here');
+    }
+    render(innerHTML) {
+      return `<slot>${innerHTML}</slot>`;
     }
   }
 );
+```
+
+---
+
+### `AppComponent.setup()`
+
+```js
+window.customElements.define('app-component',
+  class AppComponent extends HTMLElement {
+    constructor() {
+      super();
+      this.setup();
+    }
+    setup() {
+      this.innerHTML = this.render('Your app goes here');
+    }
+    render(innerHTML) {
+      return `<slot>${innerHTML}</slot>`;
+    }
+  }
+);
+```
+
+---
+
+### `createElement('app-component')`
+
+```js
+window.customElements.define('app-component',
+  class AppComponent extends HTMLElement {
+    constructor() {
+      super();
+      this.setup();
+    }
+    setup() {
+      this.innerHTML = this.render('Your app goes here');
+    }
+    render(innerHTML) {
+      return `<slot>${innerHTML}</slot>`;
+    }
+  }
+);
+
+const app = document.createElement('app-component');
+```
+
+---
+
+### `App()`
+
+```js
+const App = () => {
+  // define the component
+  window.customElements.define('app-component',
+    class AppComponent extends HTMLElement {
+      constructor() {
+        super();
+        this.setup();
+      }
+      setup(): void {
+        this.innerHTML = this.render('Your app goes here');
+      }
+      render(innerHTML) {
+        return `<slot>${innerHTML}</slot>`;
+      }
+    }
+  );
+  // then return it
+  return document.createElement('app-component');
+}
+
+// Now we can assign it :)
+const app = App();
+```
+
+---
+
+### `render(App)`
+
+```js
+// src/index.js
+
+import App = require('./App');
+
+const render = (element) = {
+  // ...attaches passed-in element to document
+}
+
+// so, pass it our App :)
+render(App)
+
 ```
 
 ---
@@ -233,100 +345,149 @@ window.customElements.define('app-component',
 
 ---
 
-### `AppComponent.render()`
 
-```ts
-class AppComponent extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = this.render();
-    document.getElementById("root")?.appendChild(this);
-  }
-  render() {
-    return `<slot>Your app goes here</slot>`;
-  }
+## Tips
+
+---
+
+### functional approach
+
+```js
+// example:
+
+const Button = () => {
+  return document.createElement('button')
 }
+
+// HTMLButtonElement
+const button = Button();
+
 ```
 
 ---
 
-### `AppComponent.render(message)`
+### factory method
 
-```ts
-class AppComponent extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = this.render('Your app goes here');
-    document.getElementById("root")?.appendChild(this);
+```js
+// example
+
+const CustomButton = () => {
+  class CustomButtonElement extends HTMLButtonElement {
+    constructor() {
+      super();
+    }
   }
-  render(message) {
-    return `<slot>${message}</slot>`;
-  }
-}
+  customElements.define('custom-button', CustomButtonElement)
+  return document.createElement('custom-button');
+};
+
+// CustomButtom
+const customButton = CustomButton();
 ```
 
 ---
 
-### `AppComponent.setup()`
+### passing props
 
-```ts
-class AppComponent extends HTMLElement {
-  constructor() {
-    super();
-    this.setup();
+```js
+/**
+ * @typedef CustomButtonProps
+ * @property {'submit' | 'reset' | 'button'} type
+ */
+
+/**
+ * @param {CustomButtonProps} props
+ * @returns {HTMLButtonElement}
+ */
+const CustomButton = (props) => {
+  class CustomButtonElement extends HTMLButtonElement {
+    constructor() {
+      super();
+      this.type = props.type;
+    }
   }
-  setup() {
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = this.render('Your app goes here');
-    document.getElementById("root")?.appendChild(this);
-  }
-  render(message) {
-    return `<slot>${message}</slot>`;
-  }
-}
+  customElements.define('custom-button', CustomButtonElement);
+  return document.createElement('custom-button');
+};
+
+const customButton = CustomButton({ type: 'submit' });
+
 ```
 
 ---
 
-_tip:_
+### adding children
 
-```ts
-// short
-customElements.define()
-```
+```js
+/**
+ * @typedef CustomButtonProps
+ * @property {'submit' | 'reset' | 'button'} type
+ * @property {Node | undefined} children
+ */
 
-or...
+/**
+ * @param {CustomButtonProps} props
+ * @returns {HTMLButtonElement}
+ */
+const CustomButton = (props) => {
+  class CustomButtonElement extends HTMLButtonElement {
+    constructor() {
+      super();
+      this.type = props.type;
+      if (props.children) this.appendChild(props.children);
+    }
+  }
+  customElements.define('custom-button', CustomButtonElement);
+  return document.createElement('custom-button');
+};
 
-```ts
-// fully-qualified
-window.customElements.define()
+const customButtonA = CustomButton({ type: 'submit' });
+const customButtonB = CustomButton({ type: 'submit', children: customButtonA });
+
 ```
 
 ---
 
-_tip:_
+### adding styles
 
-```ts
-class AppComponent extends HTMLElement {}
+```js
 
-customElements.define('app-component', AppComponent);
-```
+/**
+ * @typedef CustomButtonProps
+ * @property {'submit' | 'reset' | 'button'} type
+ * @property {Node | undefined} children
+ * @property {string | undefined} className
+ */
 
-or...
+/**
+ * @param {CustomButtonProps} props
+ * @returns {HTMLButtonElement}
+ */
+const CustomButton = (props) => {
+  class CustomButtonElement extends HTMLButtonElement {
+    constructor() {
+      super();
+      this.type = props.type;
+      if (props.children) this.appendChild(props.children);
+      if (props.className) this.className = props.className;
+    }
+  }
+  customElements.define('custom-button', CustomButtonElement);
+  return document.createElement('custom-button');
+};
 
-```ts
-customElements.define('app-component',
-  class AppComponent extends HTMLElement {}
-);
+const tailwindButton = CustomButton({
+  type: 'submit',
+  className: 'flex align-left text-white bg-red-500',
+});
+
 ```
 
 ---
 
 ## Further Reading
 
-- [eienebergeffect @ Medium: Hello Web Components](https://eisenbergeffect.medium.com/hello-web-components-795ed1bd108e)
+- [eisenebergeffect @ Medium: Hello Web Components](https://eisenbergeffect.medium.com/hello-web-components-795ed1bd108e)
 - [MDN's Web Component examples](https://github.com/mdn/web-components-examples)
 - [MDN's Web API glossary](https://developer.mozilla.org/en-US/docs/Web/API)
 - [MDN's Web API - HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)
